@@ -20,6 +20,22 @@ void print(Node *head)
     cout << head->data << " ";
     print(head->next);
 }
+Node *reverse_(Node *head)
+{
+    Node *prev = NULL;
+    Node *curr = head;
+    Node *nextptr;
+
+    while (curr != NULL)
+    {
+        nextptr = curr->next;
+        curr->next = prev;
+
+        prev = curr;
+        curr = nextptr;
+    }
+    return prev;
+}
 int main()
 {
 
@@ -35,7 +51,8 @@ int main()
     fourth->next = fifth;
     fifth->next = sixth;
     sixth->next = NULL;
-    print(head);
+    Node *newHead = reverse_(head);
+    print(newHead);
 
     return 0;
 }
