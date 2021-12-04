@@ -20,20 +20,12 @@ void print(Node* head)
     cout << head->data << " ";
     print(head->next);
 }
-Node* reverse_(Node* head)
-{
-    Node* prev = NULL;
-    Node* curr = head;
-    Node* nextPtr;
-    while (curr != NULL) {
-        nextPtr = curr->next;
-        curr->next = prev;
-
-        prev = curr;
-        curr = nextPtr;
-    }
-    return prev;
-
+Node* reverseRecesive(Node* head){
+    if (head == NULL || head->next == NULL) return head;
+    Node* newHead = reverseRecesive(head->next);
+    head->next->next = head;
+    head->next = NULL;
+    return newHead;
 }
 int main()
 {
@@ -50,7 +42,7 @@ int main()
     fourth->next = fifth;
     fifth->next = sixth;
     sixth->next = NULL;
-    Node* newHead = reverse_(head);
+    Node* newHead = reverseRecesive(head);
     print(newHead);
 
     return 0;
