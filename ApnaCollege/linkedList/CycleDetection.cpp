@@ -20,20 +20,16 @@ void print(Node* head)
     cout << head->data << " ";
     print(head->next);
 }
-Node* reverseNodes(Node* head, int k){
-    Node* curr = head;
-    Node* prev = NULL;
-    Node* nextPtr;
-    int count = 0;
-    while (curr != NULL && count < k){
-        nextPtr = curr->next;
-        curr->next = prev;
-        prev = curr;
-        curr = nextPtr;
-        count++;
+bool cycleDetection(Node* head){
+    Node* fast = head;
+    Node* slow = head;
+
+    while (fast != NULL && fast->next != NULL){
+        slow = slow->next;
+        fast = fast->next->next;
+        if (fast == slow) return true;
     }
-    if (nextPtr != NULL) head->next = reverseNodes(nextPtr, k);
-    return prev;
+    return false;
 }
 int main()
 {
@@ -50,8 +46,7 @@ int main()
     fourth->next = fifth;
     fifth->next = sixth;
     sixth->next = NULL;
-    Node* newHead = reverseNodes(head, 2);
-    print(newHead);
+    print(head);
 
     return 0;
 }
