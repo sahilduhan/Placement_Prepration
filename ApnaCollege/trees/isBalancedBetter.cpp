@@ -12,28 +12,19 @@ public:
         left = right = NULL;
     }
 };
-void display(Node* root){
-    if (root == NULL) return;
-    cout << root->data << " ";
-    display(root->left);
-    display(root->right);
+int heightTree(Node* root){
+    if (!root) return 0;
+    return max(heightTree(root->left), heightTree(root->right)) + 1;
 }
-void levelOrder(Node* root){
-    if (root == NULL) return;
-    queue<Node*> q;
-    q.push(root);
-    q.push(NULL);
+bool isBalanced(Node* root, int* heightTree){
+    int lh = 0, rh = 0;
+    if (!root) return false;
+    if (isBalanced(root->left, &lh) == false) return false;
+    if (isBalanced(root->right, &rh) == false) return false;
 
-    while (!q.empty()){
-        Node* node = q.front();
-        q.pop();
-        if (node != NULL){
-            cout << node->data << " ";
-            if (node->left)  q.push(node->left);
-            if (node->right) q.push(node->right);
-        }
-        else if (!q.empty()) q.push(NULL);
-    }
+    *heightTree = max(lh, rh) + 1;
+    if (abs(lh - rh) <= 1) return true;
+    return false;
 }
 int main(){
 
@@ -57,10 +48,7 @@ int main(){
     root->right->right->left = new Node(100);
     root->right->right->right = new Node(110);
 
-    display(root);
-    cout << endl;
-    levelOrder(root);
-    cout << endl;
+
 
 
     return 0;

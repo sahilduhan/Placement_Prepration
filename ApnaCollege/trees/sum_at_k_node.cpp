@@ -12,14 +12,10 @@ public:
         left = right = NULL;
     }
 };
-void display(Node* root){
-    if (root == NULL) return;
-    cout << root->data << " ";
-    display(root->left);
-    display(root->right);
-}
-void levelOrder(Node* root){
-    if (root == NULL) return;
+int sum_at_k_node(Node* root, int k){
+
+    if (root == NULL) return -1;
+    int level = 0, sum = 0;
     queue<Node*> q;
     q.push(root);
     q.push(NULL);
@@ -28,12 +24,16 @@ void levelOrder(Node* root){
         Node* node = q.front();
         q.pop();
         if (node != NULL){
-            cout << node->data << " ";
-            if (node->left)  q.push(node->left);
+            if (level == k) sum += node->data;
+            if (node->left) q.push(node->left);
             if (node->right) q.push(node->right);
         }
-        else if (!q.empty()) q.push(NULL);
+        else if (!q.empty()){
+            q.push(NULL);
+            level++;
+        }
     }
+    return sum;
 }
 int main(){
 
@@ -57,10 +57,7 @@ int main(){
     root->right->right->left = new Node(100);
     root->right->right->right = new Node(110);
 
-    display(root);
-    cout << endl;
-    levelOrder(root);
-    cout << endl;
+    cout << sum_at_k_node(root, 2);
 
 
     return 0;

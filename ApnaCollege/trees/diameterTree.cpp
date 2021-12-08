@@ -12,28 +12,23 @@ public:
         left = right = NULL;
     }
 };
-void display(Node* root){
-    if (root == NULL) return;
-    cout << root->data << " ";
-    display(root->left);
-    display(root->right);
+int heightTree(Node* root){
+    if (root == NULL) return 0;
+    int leftHeight = heightTree(root->left);
+    int rightHeight = heightTree(root->right);
+    return 1 + max(leftHeight, rightHeight);
 }
-void levelOrder(Node* root){
-    if (root == NULL) return;
-    queue<Node*> q;
-    q.push(root);
-    q.push(NULL);
+int diameterTree(Node* root){
+    if (root == NULL) return 0;
 
-    while (!q.empty()){
-        Node* node = q.front();
-        q.pop();
-        if (node != NULL){
-            cout << node->data << " ";
-            if (node->left)  q.push(node->left);
-            if (node->right) q.push(node->right);
-        }
-        else if (!q.empty()) q.push(NULL);
-    }
+    int leftHeight = heightTree(root->left);
+    int rightHeight = heightTree(root->right);
+    int maxHeight = 1 + leftHeight + rightHeight;
+
+    int leftDiameter = diameterTree(root->left);
+    int rightDiameter = diameterTree(root->right);
+
+    return max(maxHeight, max(leftDiameter, rightDiameter));
 }
 int main(){
 
@@ -57,10 +52,6 @@ int main(){
     root->right->right->left = new Node(100);
     root->right->right->right = new Node(110);
 
-    display(root);
-    cout << endl;
-    levelOrder(root);
-    cout << endl;
 
 
     return 0;

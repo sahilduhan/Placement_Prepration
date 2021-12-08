@@ -12,28 +12,17 @@ public:
         left = right = NULL;
     }
 };
-void display(Node* root){
-    if (root == NULL) return;
-    cout << root->data << " ";
-    display(root->left);
-    display(root->right);
+void replaceSum(Node* root){
+    if (!root) return;
+    replaceSum(root->left);
+    replaceSum(root->right);
+    if (root->left != NULL) root->data += root->left->data;
+    if (root->right != NULL) root->data += root->right->data;
 }
-void levelOrder(Node* root){
-    if (root == NULL) return;
-    queue<Node*> q;
-    q.push(root);
-    q.push(NULL);
-
-    while (!q.empty()){
-        Node* node = q.front();
-        q.pop();
-        if (node != NULL){
-            cout << node->data << " ";
-            if (node->left)  q.push(node->left);
-            if (node->right) q.push(node->right);
-        }
-        else if (!q.empty()) q.push(NULL);
-    }
+void display(Node* root){
+    if (!root) return;
+    cout << root->data << " ";
+    display(root->left); display(root->right);
 }
 int main(){
 
@@ -57,11 +46,8 @@ int main(){
     root->right->right->left = new Node(100);
     root->right->right->right = new Node(110);
 
+    replaceSum(root);
     display(root);
-    cout << endl;
-    levelOrder(root);
-    cout << endl;
-
 
     return 0;
 }
