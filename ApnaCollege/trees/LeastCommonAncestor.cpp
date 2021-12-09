@@ -12,7 +12,20 @@ public:
         left = right = NULL;
     }
 };
+Node* LeastCommonAncestor(Node* root, int n1, int n2){
+    if (root == NULL) return NULL;
+    if (root->data == n1 || root->data == n2) return root;
 
+    LeastCommonAncestor(root->left, n1, n2);
+    LeastCommonAncestor(root->right, n1, n2);
+
+    if (root->left == NULL && root->right == NULL) return NULL;
+    if (root->right != NULL && root->left != NULL) return root;
+
+    if (root->left != NULL) return LeastCommonAncestor(root->left, n1, n2);
+    return LeastCommonAncestor(root->right, n1, n2);
+
+}
 int main(){
 
     // root node
@@ -35,6 +48,7 @@ int main(){
     root->right->right->left = new Node(100);
     root->right->right->right = new Node(110);
 
+    LeastCommonAncestor(root, 60, 100);
 
     return 0;
 }
