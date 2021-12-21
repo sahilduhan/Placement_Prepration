@@ -13,6 +13,18 @@ public:
         right = NULL;
     }
 };
+
+bool checkBST(Node* root, Node* min = NULL, Node* max = NULL){
+
+    if (root == NULL) return true;
+
+    if (max != NULL && root->data >= max->data) return false;
+    if (min != NULL && root->data <= min->data) return false;
+    bool leftValid = checkBST(root->left, min, root->right);
+    bool rightValid = checkBST(root->right, root, max);
+
+    return leftValid && rightValid;
+}
 int main()
 {
 
@@ -31,6 +43,8 @@ int main()
     root->right->left = new Node(50);
     root->right->right = new Node(70);
     root->right->right->right = new Node(80);
+
+    cout << checkBST(root);
 
 
     return 0;
