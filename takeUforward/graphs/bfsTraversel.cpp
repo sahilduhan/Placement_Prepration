@@ -7,7 +7,7 @@ public:
         vector<int>bfs;
         vector<int>visited(v + 1, 0);
 
-        for (int i = 0; i < v;i++){
+        for (int i = 1; i <= v;i++){
             if (!visited[i]){
                 queue<int>q;
                 q.push(i);
@@ -16,10 +16,10 @@ public:
                     int node = q.front();
                     q.pop();
                     bfs.push_back(node);
-                    for (auto i : adjList[node]){
-                        if (!visited[i]){
-                            q.push(i);
-                            visited[i] = 1;
+                    for (auto it : adjList[node]){
+                        if (!visited[it]){
+                            q.push(it);
+                            visited[it] = 1;
                         }
                     }
                 }
