@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 struct TreeNode {
     int val;
@@ -9,38 +9,35 @@ struct TreeNode {
     TreeNode(int x, TreeNode* left, TreeNode* right): val(x), left(left), right(right) {}
 };
 vector<vector<int>>zigZagTraversal(TreeNode* root){
-    vector<vector<int>> res;
-    if (!root) return res;
-
-    queue<TreeNode*> q;
+    vector<vector<int>>result;
+    if (root == NULL) return result;
+    queue<TreeNode*>q;
     q.push(root);
-    bool flag = true;
+
+    bool leftToRight = true;
 
     while (!q.empty()){
-        int size = q.size();
-        vector<int> row(size);
+        int n = q.size();
+        vector<int> level;
 
-        for (int i = 0; i < size; i++){
+        for (int i = 0;i < n;i++){
             TreeNode* node = q.front();
             q.pop();
-            int index;
 
-            if (flag) index = i;
-            else index = size - i - 1;
+            int index = (leftToRight) ? i : (n - i - 1);
+            level[index] = node->val;
 
-            row[index] = node->val;
-
-            if (node->left)  q.push(node->left);
+            if (node->left) q.push(node->left);
             if (node->right) q.push(node->right);
 
         }
-        flag != flag;
-        res.push_back(row);
+        leftToRight != leftToRight;
+        result.push_back(level);
     }
-    return res;
-
+    return result;
 }
 int main(){
+
 
     return 0;
 }

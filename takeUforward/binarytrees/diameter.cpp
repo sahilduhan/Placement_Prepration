@@ -8,7 +8,7 @@ struct TreeNode {
     TreeNode(int x): val(x), left(nullptr), right(nullptr) {}
     TreeNode(int x, TreeNode* left, TreeNode* right): val(x), left(left), right(right) {}
 };
-int diameterTree(TreeNode* root, int diameter){
+int diameterTree(TreeNode* root, int& diameter){
 
     if (root == NULL) return 0;
     int lh = diameterTree(root->left, diameter);
@@ -22,6 +22,24 @@ int findDiameter(TreeNode* root){
     diameterTree(root, diameter);
     return diameter;
 }
+
+class Solution
+{
+    int diameter = 0;
+public:
+    int dfs(TreeNode* root)
+    {
+        if (!root) return 0;
+        int left = dfs(root->left), right = dfs(root->right);
+        diameter = max(diameter, left + right);
+        return max(left, right) + 1;
+    }
+    int diameterOfBinaryTree(TreeNode* root)
+    {
+        dfs(root);
+        return diameter;
+    }
+};
 int main(){
 
 
