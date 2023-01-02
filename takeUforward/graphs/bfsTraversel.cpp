@@ -1,29 +1,27 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-vector<int>BFStraversal(int v, vector<int>adjList []){
-    vector<int>bfs;
-    vector<int>visited(v + 1, 0);
+vector<int>BFStraversal(int n, vector<int>adjList []){
+    vector<bool>visited(n + 1, false);
+    vector<int>ans;
 
-    for (int i = 1; i <= v;i++){
-        if (!visited[i]){
-            queue<int>q;
-            q.push(i);
-            visited[i] = 1;
-            while (!q.empty()){
-                int node = q.front();
-                q.pop();
-                bfs.push_back(node);
-                for (auto it : adjList[node]){
-                    if (!visited[it]){
-                        q.push(it);
-                        visited[it] = 1;
-                    }
-                }
+    queue<int>q;
+    q.push(0);
+    visited[0] = true;
+
+    while (!q.empty()){
+        int node = q.front();
+        q.pop();
+        ans.push_back(node);
+
+        for (auto it : adjList[node]){
+            if (!visited[it]){
+                visited[it] = true;
+                q.push(it);
             }
         }
     }
-    return bfs;
+    return ans;
 }
 
 int main(){
