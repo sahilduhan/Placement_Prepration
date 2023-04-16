@@ -12,6 +12,8 @@
         "valarray": "cpp",
         "typeinfo": "cpp",
         "complex": "cpp",
-        "random": "cpp"
+        "random": "cpp",
+        "deque": "cpp",
+        "vector": "cpp"
     }
 }
