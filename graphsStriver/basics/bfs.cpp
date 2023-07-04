@@ -1,5 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
+
 vector<int> bfsOfGraph(int n, vector<int> adj []) {
     // Code here
     vector<int>ans, vis(n, 0);
@@ -21,6 +22,8 @@ vector<int> bfsOfGraph(int n, vector<int> adj []) {
     return ans;
 }
 int main(){
+
+
     int nodes, edges;
     cin >> nodes >> edges;
 
@@ -31,16 +34,6 @@ int main(){
         graph[u].push_back(v);
         graph[v].push_back(u);
     }
-    vector<int>ans;
-    // bfs(nodes, edges, graph, ans);
-    // for (auto it : ans) cout << it << " ";
-    return 0;
-}
 
-// 6 5
-// 1 2
-// 1 5
-// 2 3
-// 3 4
-// 3 6
-// 5 7
+
+}
