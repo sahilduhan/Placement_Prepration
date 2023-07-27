@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+// #include<iostream>
 using namespace std;
 typedef long long ll;
 typedef long double ld;
@@ -36,6 +37,10 @@ double eps = 1e-12;
 #define min_ele(a) *min_element(a.begin(), a.end())
 
 int main(){
+    // cout<<"sahil is starting cpp in mac os"<<endl;
+    // printf("sahil");
+    cout<<"sahil"<<endl;
+    vector<int>ans;
 
     return 0;
 }
